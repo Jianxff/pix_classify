@@ -1,0 +1,25 @@
+name: pixclassify
+channels:
+  - pytorch 
+  - nvidia
+  - conda-forge  
+  - anaconda
+  - defaults
+dependencies:
+  - python=3.9
+  - pip
+  - pytorch==2.0.0
+  - pytorch-cuda=11.7
+  - torchvision==0.15.0
+  - pillow
+  - kornia>=0.6.11
+  - pip:
+    - opencv-python
+    - opencv-contrib-python 
+    - tqdm
+    - h5py
+    - ffmpeg
+    - matplotlib
+    - streamlit
+    - lightglue @ git+https://github.com/cvg/LightGlue
+    
