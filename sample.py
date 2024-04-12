@@ -16,7 +16,7 @@ if __name__ == '__main__':
     out_dir = Path(args.output_dir)
     fps = args.sample_fps
 
-    for video in video_dir.glob('*.[mp4|avi|mov|MOV|MP4|AVI]'):
+    for video in video_dir.glob('*.[m|M|a|A][p|P|o|O|v|V][4|v|V|i|I]'):
         if video.is_file():
             output = out_dir / video.stem
             os.makedirs(output, exist_ok=True)

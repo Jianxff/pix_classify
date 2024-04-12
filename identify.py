@@ -9,8 +9,8 @@ from pixclassify import PixClassify
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="PixClassify")
+    parser.add_argument("query", type=str)
     parser.add_argument("--database", type=str, default="./data/features.h5")
-    parser.add_argument("--query", type=str)
     parser.add_argument("--tempdir", type=str, default=None)
     parser.add_argument("--saveall", action="store_true")
     args = parser.parse_args()
@@ -23,6 +23,7 @@ if __name__ == '__main__':
         os.makedirs(tempdir, exist_ok=True)
 
     query = Path(args.query)
+    
     res = classifier.identify(
         query=query, 
         top_k=2,

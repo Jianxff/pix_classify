@@ -2,6 +2,7 @@
 from pathlib import Path
 from typing import *
 import os
+import time
 # third party
 from PIL import Image
 import cv2
@@ -94,7 +95,7 @@ class Classifier:
         if saveall:
             if tempdir is None: tempdir = Path('./result')
             os.makedirs(tempdir / f'match_{label}', exist_ok=True)
-        score, final_matches, final_feature, idx = 0.0, None, None, 0
+        score, final_matches, final_feature, idx = -1.0, None, None, 0
         query_image = image
 
         # query labeled features from database
@@ -121,7 +122,7 @@ class Classifier:
                     imgs=[query_image, ref_feature["image"]],
                     feats=[query_feature, ref_feature],
                     matches=match,
-                    output=tempdir / f'match_{label}' / f'match_{idx}_{(score_i * 100):.1f}.png',
+                    output=tempdir / f'match_{label}' / f'{idx}_{(score_i * 100):.1f}.png',
                 )
                 idx += 1
             if score > stop_threshold:
@@ -133,7 +134,7 @@ class Classifier:
                 imgs=[query_image, final_feature["image"]],
                 feats=[query_feature, final_feature],
                 matches=final_matches,
-                output=tempdir / f'match_{label}.png',
+                output=tempdir / f'match_{label}_{(score * 100):.1f}.png',
             )
         return score
 
@@ -155,13 +156,18 @@ class Classifier:
             query = np.array(query)
         # convert to torch Tensor
         query = numpy_image_to_torch(query).cuda()
+
         # extract features
+        st = time.time()
         feats = self.extractor_.extract(query)
+        nd = time.time()
+        print(f"Feature extraction time: {1000 * (nd - st):.2f}ms")
 
         # match
         labels = self.database_.get_labels()
         match_scores = np.array([0.0] * len(labels))
 
+        st = time.time()
         # match form all labels
         for i in range(len(labels)):
             label = labels[i]
@@ -184,6 +190,9 @@ class Classifier:
         data = []
         for i in range(np.min([top_k, len(labels)])):
             data.append((labels[i], match_scores[i]))
+        
+        print(f"Matching time: {1000 * (time.time() - st):.2f}ms")
+
         return data
     
     ## clear labeled data
