@@ -4,7 +4,7 @@ This repository contains the **robust classifier** for similar objects and diffi
 ### Installation
 ```bash
 # clone the repository
-cd PixClassify
+cd pix_classify
 conda env create -f environment.yml
 conda activate pixclassify
 ```
