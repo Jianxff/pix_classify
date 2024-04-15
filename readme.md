@@ -1,4 +1,4 @@
-# PixClassify
+# pix_classify
 This repository contains the **robust classifier** for similar objects and difficult view angles, based on [superpoint](https://github.com/rpautrat/SuperPoint) and [lightglue](https://github.com/cvg/LightGlue).
 
 ### Installation
