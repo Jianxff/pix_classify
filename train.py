@@ -2,7 +2,7 @@
 from pathlib import Path
 import argparse
 # pixclassify
-from pixclassify import PixClassify
+import pixclassify
 
 
 if __name__ == '__main__':
@@ -14,7 +14,7 @@ if __name__ == '__main__':
     datadir = Path(args.data)
 
     db_file = datadir / 'features.h5'
-    classifier = PixClassify(database=db_file)
+    classifier = pixclassify.Classifier(database=db_file)
     if args.overwrite:
         classifier.clear()
 
