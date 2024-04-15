@@ -146,7 +146,7 @@ class Classifier:
         query_image = image
 
         # query labeled features from database
-        features = self.database_.get_features(label, image=(savedir is not None))
+        features = self.database_.get_fatures(label, image=(savedir is not None or get_extra))
 
         # iter all features from current label
         for feature in features:

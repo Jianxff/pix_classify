@@ -20,7 +20,7 @@ if __name__ == '__main__':
 
     for label_dir in datadir.glob('*'):
         if label_dir.is_dir():
-            raw_images = sorted(list(label_dir.glob('*.[jp][pn]g')))
+            raw_images = sorted(list(label_dir.glob('*.[j|p][p|n]g')))
             label = label_dir.name
             print(f'extract feature for {label}')
             classifier.add_class(label, raw_images)
