@@ -90,8 +90,7 @@ class Classifier:
         for image in tqdm(images):
             # read images
             if isinstance(image, (str, Path)):
-                image = cv2.imread(str(image))
-                image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+                image = Image.open(image)
             if isinstance(image, Image.Image):
                 image = np.array(image)
             # convert to torch Tensor
