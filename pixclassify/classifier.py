@@ -229,8 +229,7 @@ class Classifier:
         
         # read images
         if isinstance(query, (str, Path)):
-            query = cv2.imread(str(query))
-            query = cv2.cvtColor(query, cv2.COLOR_BGR2RGB)
+            query = Image.open(query)
         if isinstance(query, Image.Image):
             query = np.array(query)
         # convert to torch Tensor
@@ -329,6 +328,7 @@ class Classifier:
 
         # read video
         if isinstance(query, (str, Path)):
+            # TODO: chinese path
             query = cv2.VideoCapture(str(query))
         
         total = int(query.get(cv2.CAP_PROP_FRAME_COUNT))
