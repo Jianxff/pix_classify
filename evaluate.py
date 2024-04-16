@@ -134,7 +134,7 @@ if __name__ == '__main__':
 
     ##########################################################################################
     print(f"Total accuracy: {acc:.1f}, Averate confidence: {conf:.2f}, Total time: {EVAL_TOTAL_TIME:.2f} s")
-    file_detail_out.write(f"total,total,{EVAL_TOTAL_FRAMES},{acc},{conf},{EVAL_TOTAL_TIME}\n")
+    file_detail_out.write(f"total,total,{EVAL_TOTAL_FRAMES},{acc},{conf},{EVAL_TOTAL_TIME},-\n")
     file_total_out.write(f"total,{EVAL_TOTAL_FRAMES},{acc}\n")
     ##########################################################################################
 
